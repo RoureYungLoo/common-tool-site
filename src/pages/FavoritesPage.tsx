@@ -2,9 +2,11 @@ import { Star } from "lucide-react"
 import { Link } from "react-router-dom"
 import ToolCard from "../components/ToolCard"
 import { useStoredTools } from "../hooks/useStoredTools"
+import { usePageMeta } from "../hooks/usePageMeta"
 import { tools } from "../tools"
 
 export default function FavoritesPage() {
+  usePageMeta("收藏工具", "查看你在禄若阳的工具站收藏的常用在线工具。", "/favorites", false)
   const { favorites } = useStoredTools()
   const favoriteTools = tools.filter((tool) => favorites.includes(tool.id))
   return <div className="page-container listing-page">

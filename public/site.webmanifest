@@ -1,0 +1,11 @@
+{
+  "name": "禄若阳的工具站",
+  "short_name": "工具站",
+  "description": "免费、私密、在浏览器本地运行的常用开发工具集合。",
+  "lang": "zh-CN",
+  "start_url": "/common-tool-site/",
+  "scope": "/common-tool-site/",
+  "display": "standalone",
+  "background_color": "#f7f8f5",
+  "theme_color": "#19211d"
+}

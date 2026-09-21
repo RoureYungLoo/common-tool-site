@@ -2,9 +2,11 @@ import { Search } from "lucide-react"
 import { useMemo, useState } from "react"
 import ToolCard from "../components/ToolCard"
 import { useStoredTools } from "../hooks/useStoredTools"
+import { usePageMeta } from "../hooks/usePageMeta"
 import { searchTools } from "../tools"
 
 export default function ToolsPage() {
+  usePageMeta("全部在线工具", "浏览禄若阳的工具站提供的免费开发者工具、编码工具和文本处理工具。", "/tools")
   const [query, setQuery] = useState("")
   const [category, setCategory] = useState("全部")
   const { favorites } = useStoredTools()

@@ -2,9 +2,11 @@ import { ArrowRight, Search, ShieldCheck, Sparkles, Zap } from "lucide-react"
 import { Link, useOutletContext } from "react-router-dom"
 import ToolCard from "../components/ToolCard"
 import { useStoredTools } from "../hooks/useStoredTools"
+import { usePageMeta } from "../hooks/usePageMeta"
 import { tools } from "../tools"
 
 export default function HomePage() {
+  usePageMeta("禄若阳的工具站", "JSON、Base64、URL、UUID、时间戳、Hash、JWT 等免费在线工具，所有数据均在浏览器本地处理。")
   const { openSearch } = useOutletContext<{ openSearch: () => void }>()
   const { favorites, recents } = useStoredTools()
   const recentTools = recents.map((id) => tools.find((tool) => tool.id === id)).filter(Boolean).slice(0, 4) as typeof tools

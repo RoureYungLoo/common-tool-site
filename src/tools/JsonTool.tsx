@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Button, EditorPanel, Status, ToolWorkspace } from "../components/ui"
 
-const sample = '{"name":"折尺","private":true,"tools":["JSON","Base64","UUID"]}'
+const sample = '{"name":"禄若阳的工具站","private":true,"tools":["JSON","Base64","UUID"]}'
 
 export default function JsonTool() {
   const [input, setInput] = useState(sample)
