@@ -1,0 +1,36 @@
+import { ArrowRight, Search, ShieldCheck, Sparkles, Zap } from "lucide-react"
+import { Link, useOutletContext } from "react-router-dom"
+import ToolCard from "../components/ToolCard"
+import { useStoredTools } from "../hooks/useStoredTools"
+import { tools } from "../tools"
+
+export default function HomePage() {
+  const { openSearch } = useOutletContext<{ openSearch: () => void }>()
+  const { favorites, recents } = useStoredTools()
+  const recentTools = recents.map((id) => tools.find((tool) => tool.id === id)).filter(Boolean).slice(0, 4) as typeof tools
+  const featured = tools.slice(0, 6)
+  return <>
+    <section className="hero">
+      <div className="hero-grid" aria-hidden="true" />
+      <div className="eyebrow"><Sparkles size={14} /> 简单、轻快、开箱即用</div>
+      <h1>让琐碎的工作，<br /><span>少一点折腾。</span></h1>
+      <p>为开发者和日常工作准备的一组小工具。无需注册，<br className="desktop-only" />数据不会离开你的浏览器。</p>
+      <button className="hero-search" onClick={openSearch}>
+        <Search size={21} /><span>搜索工具，例如 JSON、Base64、时间戳…</span><kbd>Ctrl K</kbd>
+      </button>
+      <div className="hero-hints"><span><Zap size={15} /> 即开即用</span><span><ShieldCheck size={15} /> 本地处理</span><span>8 个精选工具</span></div>
+    </section>
+
+    <section className="content-section">
+      {recentTools.length > 0 && <div className="section-block recent-block">
+        <div className="section-heading"><div><span className="section-kicker">QUICK ACCESS</span><h2>最近使用</h2></div></div>
+        <div className="recent-grid">{recentTools.map((tool) => <ToolCard key={tool.id} tool={tool} favorite={favorites.includes(tool.id)} compact />)}</div>
+      </div>}
+      <div className="section-block">
+        <div className="section-heading"><div><span className="section-kicker">POPULAR TOOLS</span><h2>常用工具</h2><p>把高频操作变成一次点击。</p></div><Link to="/tools">查看全部 <ArrowRight size={16} /></Link></div>
+        <div className="tool-grid">{featured.map((tool) => <ToolCard key={tool.id} tool={tool} favorite={favorites.includes(tool.id)} />)}</div>
+      </div>
+      <div className="privacy-banner"><span className="privacy-icon"><ShieldCheck size={26} /></span><div><strong>你的数据，只属于你</strong><p>所有工具都在本地浏览器中运行，内容不会上传到服务器。</p></div><span className="local-badge">100% 本地处理</span></div>
+    </section>
+  </>
+}
