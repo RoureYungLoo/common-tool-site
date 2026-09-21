@@ -16,6 +16,22 @@ const pages = [
   ["tools/hash", "Hash 计算", "在线计算 SHA-1、SHA-256、SHA-384 与 SHA-512 消息摘要。", true],
   ["tools/jwt-parser", "JWT 解析", "在浏览器本地解析 JWT Header 与 Payload，不上传 Token。", true],
   ["tools/text-lab", "文本处理", "在线统计字符和单词，并完成大小写转换、空白清理等操作。", true],
+  ["tools/regex-tester", "正则测试", "在线实时测试正则表达式、匹配结果与捕获分组。", true],
+  ["tools/base-converter", "进制转换", "在线完成二进制、八进制、十进制与十六进制转换。", true],
+  ["tools/color-converter", "颜色转换", "在线转换 HEX、RGB 与 HSL 颜色格式。", true],
+  ["tools/password-generator", "密码生成器", "在浏览器本地生成安全的随机密码并估算强度。", true],
+  ["tools/html-entity", "HTML 实体", "在线进行 HTML 特殊字符实体编码与解码。", true],
+  ["tools/url-parser", "URL 解析", "在线拆解 URL 协议、域名、路径和查询参数。", true],
+  ["tools/text-diff", "文本 Diff", "在线按行比较两段文本的新增、删除和相同内容。", true],
+  ["tools/json-to-typescript", "JSON 转 TypeScript", "从 JSON 数据自动生成 TypeScript Interface 类型。", true],
+  ["tools/xml-formatter", "XML 格式化", "在线格式化、校验与压缩 XML 文档。", true],
+  ["tools/csv-json", "CSV / JSON 转换", "在线完成 CSV 表格与 JSON 对象数组相互转换。", true],
+  ["tools/sql-formatter", "SQL 格式化", "在线格式化与压缩常见 SQL 语句。", true],
+  ["tools/cron-parser", "Cron 解析", "在线校验并解释标准五段 Cron 表达式。", true],
+  ["tools/markdown-preview", "Markdown 预览", "在浏览器中安全预览常用 Markdown 结构。", true],
+  ["tools/chmod-calculator", "Unix 权限计算", "在线计算 chmod 数字权限、符号权限和命令。", true],
+  ["tools/list-processor", "列表处理", "在线完成列表排序、去重、反转和空行清理。", true],
+  ["tools/css-unit-converter", "CSS 单位转换", "在线换算 PX、REM、EM 与 VW 单位。", true],
 ]
 
 const escapeAttribute = (value) => value.replaceAll("&", "&amp;").replaceAll('"', "&quot;")

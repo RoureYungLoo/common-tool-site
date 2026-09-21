@@ -12,6 +12,22 @@
 - SHA-1 / SHA-256 / SHA-384 / SHA-512
 - JWT Header / Payload 解析
 - 文本统计与常见转换
+- 正则表达式实时测试
+- 二、八、十、十六进制转换
+- HEX / RGB / HSL 颜色转换
+- 安全随机密码生成
+- HTML 实体编解码
+- URL 结构与查询参数解析
+- 文本 Diff
+- JSON 转 TypeScript 类型
+- XML 格式化与压缩
+- CSV / JSON 相互转换
+- SQL 格式化与压缩
+- Cron 表达式解析
+- Markdown 安全预览
+- Unix chmod 权限计算
+- 列表排序、去重与清理
+- CSS 单位转换
 
 ## 本地运行
 
