@@ -1,10 +1,12 @@
-import { Binary, Braces, Calculator, CalendarClock, CaseSensitive, Clock3, CodeXml, Database, FileCode2, FileJson2, FileText, Fingerprint, GitCompareArrows, Hash, KeyRound, Link2, ListFilter, Palette, Regex, Ruler, ShieldCheck, Table2, TerminalSquare, Waypoints } from "lucide-react"
+import { Binary, Braces, Calculator, CalendarClock, CaseSensitive, Clock3, CodeXml, Database, FileCode2, FileJson2, FileText, Fingerprint, GitCompareArrows, Hash, KeyRound, Link2, ListFilter, Palette, Regex, Ruler, ShieldCheck, Smartphone, Table2, TerminalSquare, Waypoints } from "lucide-react"
 import type { ToolDefinition } from "../types"
 import Base64Tool from "./Base64Tool"
 import BaseConverterTool from "./BaseConverterTool"
 import ColorTool from "./ColorTool"
 import CronTool from "./CronTool"
 import CssUnitTool from "./CssUnitTool"
+import DeviceParamsTool from "./DeviceParamsTool"
+import SimpleDeviceParamsTool from "./SimpleDeviceParamsTool"
 import CsvJsonTool from "./CsvJsonTool"
 import ChmodTool from "./ChmodTool"
 import HashTool from "./HashTool"
@@ -30,7 +32,9 @@ export const tools: ToolDefinition[] = [
   { id: "base64", name: "Base64 编解码", shortName: "Base64", description: "支持 Unicode 的 Base64 编码与解码", category: "编码", keywords: ["base64", "编码", "解码"], icon: Binary, accent: "blue", component: Base64Tool },
   { id: "url-codec", name: "URL 编解码", shortName: "URL", description: "对 URL 组件安全地编码或解码", category: "编码", keywords: ["url", "encode", "decode", "链接"], icon: Link2, accent: "violet", component: UrlTool },
   { id: "uuid-generator", name: "UUID 生成器", shortName: "UUID", description: "批量生成安全的 UUID v4 标识符", category: "开发", keywords: ["uuid", "guid", "生成", "随机"], icon: Fingerprint, accent: "orange", component: UuidTool },
-  { id: "timestamp", name: "时间戳转换", shortName: "时间戳", description: "Unix 时间戳与可读时间快速转换", category: "开发", keywords: ["timestamp", "unix", "时间", "日期"], icon: Clock3, accent: "cyan", component: TimestampTool },
+  { id: "device-params-generator", name: "设备参数生成器", shortName: "设备参数", description: "按主流品牌与机型生成广告设备、App、隐私与风控测试参数", category: "开发", keywords: ["imei", "oaid", "android id", "gaid", "idfa", "idfv", "imsi", "iccid", "mac", "openrtb", "app", "广告", "iphone", "华为", "小米", "oppo", "vivo", "荣耀", "三星", "pixel", "设备参数", "机型", "生成"], icon: Smartphone, accent: "cyan", component: DeviceParamsTool },
+  { id: "simple-device-params-generator", name: "简版设备参数生成器", shortName: "设备参数简版", description: "按品牌与机型生成 UA、常用广告标识、MD5、归因、定位和 App 参数", category: "开发", keywords: ["ua", "user agent", "imei", "md5", "android id", "oaid", "mac", "idfa", "caid", "gaid", "paid", "拼多多", "geo", "app", "设备参数", "机型", "生成"], icon: Smartphone, accent: "blue", component: SimpleDeviceParamsTool },
+  { id: "timestamp", name: "时间戳转换", shortName: "时间戳", description: "Unix 秒/毫秒、日期时间、时区与相对时间双向转换", category: "开发", keywords: ["timestamp", "unix", "时间", "日期", "毫秒", "时区", "utc", "iso 8601"], icon: Clock3, accent: "cyan", component: TimestampTool },
   { id: "hash", name: "Hash 计算", shortName: "Hash", description: "计算 SHA 系列消息摘要", category: "开发", keywords: ["hash", "sha", "摘要", "哈希"], icon: Hash, accent: "rose", component: HashTool },
   { id: "jwt-parser", name: "JWT 解析", shortName: "JWT", description: "本地解析 JWT Header 与 Payload", category: "开发", keywords: ["jwt", "token", "解析"], icon: KeyRound, accent: "amber", component: JwtTool },
   { id: "text-lab", name: "文本处理", shortName: "文本", description: "统计、转换大小写与清理文本", category: "文本", keywords: ["text", "case", "count", "文本", "大小写"], icon: CaseSensitive, accent: "teal", component: TextTool },

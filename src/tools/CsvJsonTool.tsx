@@ -36,9 +36,10 @@ export default function CsvJsonTool() {
   const [input, setInput] = useState("name,type,local\nJSON,developer,true\nBase64,encoding,true")
   const [output, setOutput] = useState("")
   const [error, setError] = useState("")
+  const [mode, setMode] = useState<"csv" | "json">("csv")
   const run = (mode: "csv" | "json") => {
-    try { setOutput(mode === "csv" ? JSON.stringify(parseCsv(input), null, 2) : jsonToCsv(input)); setError("") }
+    try { setOutput(mode === "csv" ? JSON.stringify(parseCsv(input), null, 2) : jsonToCsv(input)); setMode(mode); setError("") }
     catch (reason) { setError(reason instanceof Error ? reason.message : "转换失败") }
   }
-  return <><ToolWorkspace><EditorPanel label="输入" value={input} onChange={setInput} /><EditorPanel label="转换结果" value={output} readOnly /></ToolWorkspace><div className="tool-controls"><Button onClick={() => run("csv")}>CSV → JSON</Button><Button className="button-secondary" onClick={() => run("json")}>JSON → CSV</Button>{error && <Status error>{error}</Status>}</div></>
+  return <><ToolWorkspace><EditorPanel label="输入" value={input} onChange={setInput} language={mode === "json" ? "json" : undefined} /><EditorPanel label="转换结果" value={output} readOnly language={mode === "csv" ? "json" : undefined} /></ToolWorkspace><div className="tool-controls"><Button onClick={() => run("csv")}>CSV → JSON</Button><Button className="button-secondary" onClick={() => run("json")}>JSON → CSV</Button>{error && <Status error>{error}</Status>}</div></>
 }

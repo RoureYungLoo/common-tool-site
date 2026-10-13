@@ -15,8 +15,7 @@ const categories: { id: ToolCategory; label: string }[] = [
 export default function HomePage() {
   usePageMeta("禄若阳的工具站", "JSON、Base64、URL、UUID、时间戳、Hash、JWT 等免费在线工具，所有数据均在浏览器本地处理。")
   const { openSearch } = useOutletContext<{ openSearch: () => void }>()
-  const { favorites, recents } = useStoredTools()
-  const recentTools = recents.map((id) => tools.find((tool) => tool.id === id)).filter(Boolean).slice(0, 4) as typeof tools
+  const { favorites } = useStoredTools()
   const featured = tools.slice(0, 6)
   return <>
     <section className="hero">
@@ -31,27 +30,22 @@ export default function HomePage() {
     </section>
 
     <section className="content-section">
-      {recentTools.length > 0 && <div className="section-block recent-block">
-        <div className="section-heading"><div><span className="section-kicker">QUICK ACCESS</span><h2>最近使用</h2></div></div>
-        <div className="recent-grid">{recentTools.map((tool) => <ToolCard key={tool.id} tool={tool} favorite={favorites.includes(tool.id)} compact />)}</div>
-      </div>}
       <div className="section-block">
-        <div className="section-heading"><div><span className="section-kicker">POPULAR TOOLS</span><h2>常用工具</h2><p>把高频操作变成一次点击。</p></div><a href="#all-tools">查看全部 <ArrowRight size={16} /></a></div>
-        <div className="tool-grid">{featured.map((tool) => <ToolCard key={tool.id} tool={tool} favorite={favorites.includes(tool.id)} />)}</div>
+        <div className="section-heading"><div><h2>常用工具</h2></div><a href="#all-tools">查看全部 <ArrowRight size={16} /></a></div>
+        <div className="tool-grid">{featured.map((tool) => <ToolCard key={tool.id} tool={tool} favorite={favorites.includes(tool.id)} dense />)}</div>
       </div>
       <div className="section-block" id="all-tools">
-        <div className="section-heading"><div><span className="section-kicker">ALL TOOLS</span><h2>全部工具</h2><p>当前共有 {tools.length} 个工具，全部在浏览器本地运行。</p></div></div>
+        <div className="section-heading"><div><h2>全部工具</h2></div></div>
         <div className="home-category-list">
           {categories.map((category) => {
             const categoryTools = tools.filter((tool) => tool.category === category.id)
             return <section className="home-category-group" key={category.id}>
               <div className="home-category-heading"><h3>{category.label}</h3><span>{categoryTools.length}</span></div>
-              <div className="tool-grid">{categoryTools.map((tool) => <ToolCard key={tool.id} tool={tool} favorite={favorites.includes(tool.id)} />)}</div>
+              <div className="tool-grid">{categoryTools.map((tool) => <ToolCard key={tool.id} tool={tool} favorite={favorites.includes(tool.id)} dense />)}</div>
             </section>
           })}
         </div>
       </div>
-      <div className="privacy-banner"><span className="privacy-icon"><ShieldCheck size={26} /></span><div><strong>你的数据，只属于你</strong><p>所有工具都在本地浏览器中运行，内容不会上传到服务器。</p></div><span className="local-badge">100% 本地处理</span></div>
     </section>
   </>
 }

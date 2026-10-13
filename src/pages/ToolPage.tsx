@@ -61,7 +61,7 @@ export default function ToolPage() {
   return <div className="page-container tool-page">
     <Link to="/tools" className="back-link"><ChevronLeft size={16} />全部工具</Link>
     <div className="tool-title-row">
-      <div className="tool-title"><span className={`tool-icon large ${tool.accent}`}><Icon size={26} /></span><div><span className="section-kicker">{tool.category.toUpperCase()} TOOL</span><h1>{tool.name}</h1><p>{tool.description}</p></div></div>
+      <div className="tool-title"><span className={`tool-icon large ${tool.accent}`}><Icon size={26} /></span><h1>{tool.name}</h1></div>
       <button className={`favorite-large ${favorite ? "selected" : ""}`} onClick={() => toggleFavorite(tool.id)}><Star size={17} fill={favorite ? "currentColor" : "none"} />{favorite ? "已收藏" : "收藏"}</button>
     </div>
     <div className="workspace-toolbar">

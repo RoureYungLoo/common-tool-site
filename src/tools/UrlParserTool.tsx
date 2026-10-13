@@ -11,7 +11,7 @@ export default function UrlParserTool() {
   }, [input])
   return <>
     <label className="block-field"><span>URL 地址</span><input className="text-input mono" value={input} onChange={(event) => setInput(event.target.value)} placeholder="https://example.com/path?key=value" /></label>
-    <EditorPanel label="解析结果" value={parsed.output} readOnly placeholder="URL 各部分会显示在这里" />
+    <EditorPanel label="解析结果" value={parsed.output} readOnly placeholder="URL 各部分会显示在这里" language="json" />
     <div className="tool-controls">{parsed.error ? <Status error>{parsed.error}</Status> : <Status>URL 解析成功</Status>}</div>
   </>
 }

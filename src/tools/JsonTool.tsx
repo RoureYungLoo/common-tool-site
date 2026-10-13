@@ -17,8 +17,8 @@ export default function JsonTool() {
   }
   return <>
     <ToolWorkspace>
-      <EditorPanel label="输入" value={input} onChange={setInput} placeholder="粘贴 JSON…" />
-      <EditorPanel label="输出" value={output} readOnly placeholder="处理结果会显示在这里" />
+      <EditorPanel label="输入" value={input} onChange={setInput} placeholder="粘贴 JSON…" language="json" />
+      <EditorPanel label="输出" value={output} readOnly placeholder="处理结果会显示在这里" language="json" />
     </ToolWorkspace>
     <div className="tool-controls">
       <Button onClick={() => transform(false)}>格式化</Button>

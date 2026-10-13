@@ -35,7 +35,7 @@ export default function JsonToTsTool() {
     catch (reason) { setError(reason instanceof Error ? reason.message : "JSON 格式不正确") }
   }
   return <>
-    <ToolWorkspace><EditorPanel label="JSON 输入" value={input} onChange={setInput} /><EditorPanel label="TypeScript 类型" value={output} readOnly placeholder="生成的类型会显示在这里" /></ToolWorkspace>
+    <ToolWorkspace><EditorPanel label="JSON 输入" value={input} onChange={setInput} language="json" /><EditorPanel label="TypeScript 类型" value={output} readOnly placeholder="生成的类型会显示在这里" /></ToolWorkspace>
     <div className="tool-controls"><Button onClick={convert}>生成类型</Button>{error ? <Status error>{error}</Status> : output && <Status>类型生成完成</Status>}</div>
   </>
 }
