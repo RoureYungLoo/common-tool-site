@@ -8,8 +8,20 @@ type SetKey = keyof typeof sets
 function createPassword(length: number, enabled: SetKey[]) {
   const chars = enabled.map((key) => sets[key]).join("")
   if (!chars) return ""
-  const bytes = crypto.getRandomValues(new Uint32Array(length))
-  return Array.from(bytes, (value) => chars[value % chars.length]).join("")
+  const randomIndex = (max: number) => {
+    const limit = Math.floor(0x1_0000_0000 / max) * max
+    const value = new Uint32Array(1)
+    do crypto.getRandomValues(value)
+    while (value[0] >= limit)
+    return value[0] % max
+  }
+  const result = enabled.map((key) => sets[key][randomIndex(sets[key].length)])
+  while (result.length < length) result.push(chars[randomIndex(chars.length)])
+  for (let index = result.length - 1; index > 0; index--) {
+    const target = randomIndex(index + 1)
+    ;[result[index], result[target]] = [result[target], result[index]]
+  }
+  return result.join("")
 }
 
 export default function PasswordTool() {

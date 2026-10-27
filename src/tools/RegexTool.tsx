@@ -1,25 +1,38 @@
-import { useMemo, useState } from "react"
+import { useEffect, useState } from "react"
 import { EditorPanel, Status, ToolWorkspace } from "../components/ui"
 
 export default function RegexTool() {
   const [pattern, setPattern] = useState("(\\w+)@(\\w+\\.\\w+)")
   const [text, setText] = useState("联系 alice@example.com 或 bob@tool.dev 获取帮助。")
   const [flags, setFlags] = useState("gi")
-  const result = useMemo(() => {
-    try {
-      const expression = new RegExp(pattern, flags.includes("g") ? flags : `${flags}g`)
-      const matches = Array.from(text.matchAll(expression))
-      return {
-        error: "",
-        output: matches.length ? matches.map((match, index) => [
-          `#${index + 1} 位置 ${match.index}`,
-          `完整匹配: ${match[0]}`,
-          ...match.slice(1).map((group, groupIndex) => `分组 ${groupIndex + 1}: ${group ?? ""}`),
-        ].join("\n")).join("\n\n") : "没有匹配结果",
-        count: matches.length,
+  const [result, setResult] = useState({ error: "", output: "正在匹配…", count: 0, running: true })
+  useEffect(() => {
+    setResult((current) => ({ ...current, error: "", running: true }))
+    let worker: Worker | null = null
+    const start = window.setTimeout(() => {
+      worker = new Worker(new URL("./regex.worker.ts", import.meta.url), { type: "module" })
+      const timeout = window.setTimeout(() => {
+        worker?.terminate()
+        worker = null
+        setResult({ error: "表达式执行时间过长，已安全终止", output: "", count: 0, running: false })
+      }, 500)
+      worker.onmessage = (event) => {
+        window.clearTimeout(timeout)
+        setResult({ ...event.data, running: false })
+        worker?.terminate()
+        worker = null
       }
-    } catch (reason) {
-      return { error: reason instanceof Error ? reason.message : "正则表达式无效", output: "", count: 0 }
+      worker.onerror = () => {
+        window.clearTimeout(timeout)
+        setResult({ error: "正则匹配线程运行失败", output: "", count: 0, running: false })
+        worker?.terminate()
+        worker = null
+      }
+      worker.postMessage({ pattern, text, flags })
+    }, 160)
+    return () => {
+      window.clearTimeout(start)
+      worker?.terminate()
     }
   }, [pattern, text, flags])
 
@@ -34,6 +47,6 @@ export default function RegexTool() {
       <EditorPanel label="测试文本" value={text} onChange={setText} placeholder="输入需要匹配的文本…" />
       <EditorPanel label={`匹配结果 · ${result.count}`} value={result.output} readOnly />
     </ToolWorkspace>
-    <div className="tool-controls">{result.error ? <Status error>{result.error}</Status> : <Status>实时匹配完成</Status>}</div>
+    <div className="tool-controls">{result.error ? <Status error>{result.error}</Status> : <Status>{result.running ? "正在安全线程中匹配…" : "实时匹配完成"}</Status>}</div>
   </>
 }

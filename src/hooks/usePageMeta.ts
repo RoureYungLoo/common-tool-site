@@ -1,7 +1,8 @@
 import { useEffect } from "react"
+import content from "../content.json"
 
-const SITE_NAME = "禄若阳的工具站"
-const SITE_ORIGIN = "https://roureyungloo.github.io/common-tool-site"
+const SITE_NAME = content.site.name
+const SITE_ORIGIN = content.site.origin
 
 function setMeta(selector: string, attribute: string, value: string) {
   document.querySelector<HTMLMetaElement>(selector)?.setAttribute(attribute, value)

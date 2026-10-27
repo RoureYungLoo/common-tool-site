@@ -5,28 +5,28 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
-    "build:pages": "npm run build && node scripts/prepare-pages.mjs",
+    "build": "tsc -b && vite build && node scripts/prepare-pages.mjs",
+    "build:pages": "npm run build",
     "preview": "vite preview"
   },
   "dependencies": {
     "@noble/hashes": "^2.4.0",
-    "@tailwindcss/vite": "latest",
-    "lucide-react": "latest",
+    "@tailwindcss/vite": "4.3.3",
+    "lucide-react": "1.47.0",
     "prismjs": "^1.30.0",
-    "react": "latest",
-    "react-dom": "latest",
-    "react-router-dom": "latest",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "react-router-dom": "7.18.4",
     "react-simple-code-editor": "^0.14.1",
-    "tailwindcss": "latest"
+    "tailwindcss": "4.3.3"
   },
   "devDependencies": {
-    "@types/node": "latest",
+    "@types/node": "26.6.2",
     "@types/prismjs": "^1.26.6",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
-    "@vitejs/plugin-react": "latest",
-    "typescript": "latest",
-    "vite": "latest"
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.1",
+    "typescript": "7.0.2",
+    "vite": "8.3.0"
   }
 }

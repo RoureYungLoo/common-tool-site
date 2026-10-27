@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getFavorites, getRecents } from "../lib/storage"
+import { getFavorites, getRecents, getToolUsage } from "../lib/storage"
 
 export function useStoredTools() {
   const [, refresh] = useState(0)
@@ -8,5 +8,5 @@ export function useStoredTools() {
     window.addEventListener("tools-storage", update)
     return () => window.removeEventListener("tools-storage", update)
   }, [])
-  return { favorites: getFavorites(), recents: getRecents() }
+  return { favorites: getFavorites(), recents: getRecents(), usage: getToolUsage() }
 }

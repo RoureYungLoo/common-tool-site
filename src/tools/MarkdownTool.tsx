@@ -25,5 +25,5 @@ function renderMarkdown(value: string) {
 export default function MarkdownTool() {
   const [input, setInput] = useState("# 禄若阳的工具站\n\n> 简单、私密的在线工具。\n\n## 特点\n\n- 浏览器本地处理\n- 无需注册\n- 支持多开布局\n\n```ts\nconst privateByDefault = true\n```")
   const preview = useMemo(() => renderMarkdown(input), [input])
-  return <><div className="markdown-workspace"><EditorPanel label="Markdown" value={input} onChange={setInput} /><section className="markdown-preview"><div className="editor-head"><span>安全预览</span></div><div className="markdown-body">{preview}</div></section></div><div className="tool-controls"><Status>预览不会执行输入内容中的 HTML</Status></div></>
+  return <><div className="markdown-workspace"><EditorPanel label="Markdown" value={input} onChange={setInput} /><section className="markdown-preview"><div className="flex min-h-11 items-center border-b border-app-line bg-app-soft/70 px-3"><span className="text-[13px] font-bold text-app-muted">安全预览</span></div><div className="markdown-body">{preview}</div></section></div><div className="tool-controls"><Status>预览不会执行输入内容中的 HTML</Status></div></>
 }

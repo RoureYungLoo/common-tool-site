@@ -1,5 +1,22 @@
 export const copyText = async (text: string) => {
-  await navigator.clipboard.writeText(text)
+  if (navigator.clipboard?.writeText) {
+    try {
+      await navigator.clipboard.writeText(text)
+      return
+    } catch {
+      // Fall through for browsers or contexts where Clipboard API is denied.
+    }
+  }
+  const textarea = document.createElement("textarea")
+  textarea.value = text
+  textarea.setAttribute("readonly", "")
+  textarea.style.position = "fixed"
+  textarea.style.opacity = "0"
+  document.body.appendChild(textarea)
+  textarea.select()
+  const copied = document.execCommand("copy")
+  textarea.remove()
+  if (!copied) throw new Error("浏览器未允许复制，请手动选择内容复制")
 }
 
 export const encodeBase64 = (value: string) => {

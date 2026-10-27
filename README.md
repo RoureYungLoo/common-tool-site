@@ -47,3 +47,5 @@ npm run build
 推送到 `main` 分支后，GitHub Actions 会自动构建并发布到 GitHub Pages。首次使用时，请在仓库的 **Settings → Pages → Build and deployment** 中将 Source 设置为 **GitHub Actions**。
 
 技术栈：React 19、TypeScript、Vite 8、React Router、Tailwind CSS 4、Lucide Icons。所有工具计算均在浏览器本地完成。
+
+工具名称、搜索关键词与 SEO 信息统一维护在 `src/content.json`。工具页面按需加载，生产构建会自动生成静态路由入口、sitemap 和版本化 Service Worker，首次访问后可离线使用。

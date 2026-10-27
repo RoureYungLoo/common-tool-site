@@ -67,6 +67,7 @@ export default function TimestampTool() {
   const [timezone, setTimezone] = useState(localTimezone)
   const [dateInput, setDateInput] = useState(() => toDateTimeLocal(new Date()))
   const [copied, setCopied] = useState("")
+  const [copyError, setCopyError] = useState("")
 
   useEffect(() => {
     const timer = window.setInterval(() => setNow(Date.now()), 1000)
@@ -81,9 +82,14 @@ export default function TimestampTool() {
   }, [dateInput])
 
   const copy = async (key: string, value: string) => {
-    await copyText(value)
-    setCopied(key)
-    window.setTimeout(() => setCopied((current) => current === key ? "" : current), 1400)
+    try {
+      await copyText(value)
+      setCopyError("")
+      setCopied(key)
+      window.setTimeout(() => setCopied((current) => current === key ? "" : current), 1400)
+    } catch (reason) {
+      setCopyError(reason instanceof Error ? reason.message : "复制失败")
+    }
   }
 
   const useTimestamp = (milliseconds: number, preferredUnit: Exclude<TimestampUnit, "auto"> = "seconds") => {
@@ -122,7 +128,7 @@ export default function TimestampTool() {
       <label><span>显示时区</span><select className="select-input" value={timezone} onChange={(event) => setTimezone(event.target.value)}>
         {timezoneOptions.map((item) => <option key={item} value={item}>{item === localTimezone ? `${item}（本地）` : item}</option>)}
       </select></label>
-      <Status><Clock3 size={13} />日期输入按浏览器本地时区解析</Status>
+      <Status error={Boolean(copyError)}><Clock3 size={13} />{copyError || "日期输入按浏览器本地时区解析"}</Status>
     </div>
 
     <div className="timestamp-converters">

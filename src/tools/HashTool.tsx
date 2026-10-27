@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Button, EditorPanel, Status } from "../components/ui"
+import { Button, EditorPanel, Status, ToolWorkspace } from "../components/ui"
 
 type Algorithm = "SHA-1" | "SHA-256" | "SHA-384" | "SHA-512"
 
@@ -15,10 +15,10 @@ export default function HashTool() {
     <div className="hash-options">
       {(["SHA-1", "SHA-256", "SHA-384", "SHA-512"] as Algorithm[]).map((item) => <button key={item} className={algorithm === item ? "choice active" : "choice"} onClick={() => setAlgorithm(item)}>{item}</button>)}
     </div>
-    <div className="tool-workspace single-row">
+    <ToolWorkspace>
       <EditorPanel label="输入文本" value={input} onChange={setInput} placeholder="输入需要计算哈希的文本…" />
       <EditorPanel label={`${algorithm} 摘要`} value={output} readOnly placeholder="计算结果会显示在这里" />
-    </div>
+    </ToolWorkspace>
     <div className="tool-controls"><Button onClick={run}>计算摘要</Button><Status>内容仅在当前浏览器中处理</Status></div>
   </>
 }
